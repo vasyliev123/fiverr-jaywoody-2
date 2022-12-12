@@ -1,0 +1,28 @@
+from telethon.sync import TelegramClient, events
+import time
+api_id = 9257340
+api_hash = '83f3a9c114640d847a72457b5e4ef724'
+
+client6043524098=TelegramClient("client6043524098", api_id, api_hash)
+
+client6043524098.start()
+
+async def main():
+    all_participians=[]
+    async for dialog in client6043524098.iter_dialogs():
+        print(dialog.name + " " + str(dialog.id))
+        if(dialog.id==-1001625879608):
+            print("\nASS\n")
+            all_participians=await client6043524098.get_participants(dialog, aggressive=True)
+    
+     
+    print(all_participians[0])
+    for user in all_participians:
+        try:
+            if user.username is not None:
+                await client6043524098.send_message(user.username, "hello, beauty")
+                print("message sent to "+user.username+" "+user.first_name)
+        except Exception as e:
+            print(e)
+with client6043524098:
+    client6043524098.loop.run_until_complete(main())
